@@ -1,6 +1,7 @@
 import pygame
 import sys
 from game.dialogbox import DialogueBox
+from game.setting import Setting
 
 
 # Initialize Pygame
@@ -10,6 +11,10 @@ pygame.init()
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption("Visual Novel")
 
+# initialize Setting
+setting = Setting()
+screen_width, screen_height = setting.get_dimensions()
+
 
 # Main game loop
 def main():
@@ -18,7 +23,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Create an instance of DialogueBox
-    dialogue_box = DialogueBox(100, 500, 600, 150, (0, 0, 0))
+    dialogue_box = DialogueBox(50, 700, screen_width-100, screen_height-750, (100, 100, 100))
     dialogue_box.set_name("Character Name")
     dialogue_box.set_dialogue("This is a sample dialogue for testing the DialogueBox.")
 
@@ -29,7 +34,7 @@ def main():
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 running = False
 
-        screen.fill((255, 255, 255))  # Fill the screen with white
+        screen.fill((0, 0, 0))  # Fill the screen with white
 
         dialogue_box.draw(screen)
 
