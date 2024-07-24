@@ -2,6 +2,10 @@ import pygame
 
 class Setting:
     def __init__(self):
+        self.screen_width = 0
+        self.screen_height = 0
+        self.multiplier = 10
+
         self.update_display_info()
 
     def update_display_info(self):
