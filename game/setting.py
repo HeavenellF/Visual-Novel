@@ -18,7 +18,7 @@ class Setting:
 
     def resize_display(self, width, height):
         self.multiplier = int(self.multiplier * (width / self.screen_width))
-        pygame.display.set_mode((width, height), pygame.RESIZABLE)
+        pygame.display.set_mode((width, height))
         self.update_display_info()
 
     def to_fullscreen(self):

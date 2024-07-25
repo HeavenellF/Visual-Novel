@@ -1,5 +1,4 @@
 import pygame
-from game.setting import Setting
 
 class DialogueBox:
     def __init__(self, x, y, width, height, background_color=(0, 0, 0), setting=None):
@@ -26,8 +25,6 @@ class DialogueBox:
         
         # Fill the surface with the background color and set its alpha value
         background_surface.fill((*self.background_color, 100))  # 128 is the alpha value (0-255)
-        
-        # Blit the background surface onto the main screen
         screen.blit(background_surface, (self.x, self.y))
         
         # Render the name text
