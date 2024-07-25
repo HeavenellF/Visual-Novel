@@ -1,5 +1,5 @@
-import pygame
 import sys
+import pygame
 from game.setting import Setting
 from game.scene import Scene
 
@@ -21,7 +21,6 @@ def main():
 
     running = True
     clock = pygame.time.Clock()
- 
     scene = Scene(setting)
 
     while running:
