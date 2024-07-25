@@ -9,6 +9,7 @@ pygame.init()
 
 # Set up display
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+# screen = pygame.display.set_mode((1344, 756), pygame.RESIZABLE)
 pygame.display.set_caption("Visual Novel")
 
 # initialize Setting
@@ -35,6 +36,7 @@ def main():
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                 setting.to_fullscreen()
                 scene = Scene(setting)
+
 
         screen.fill((0, 0, 0))  # Fill the screen with black
 
