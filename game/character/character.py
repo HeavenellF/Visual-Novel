@@ -1,6 +1,9 @@
 from game.character.emotion import Emotion
 
 class Character:
+    """
+    A class to represent a character in the game.
+    """
     def __init__(self, character_id, name):
         self.character_id = character_id
         self.name = name
