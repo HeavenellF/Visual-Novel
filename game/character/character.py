@@ -13,7 +13,7 @@ class Character:
 
         Character.instances.append(self)
 
-    def add_emotion(self, emotion_name, emotion_id, image=None):
+    def add_emotion(self, emotion_name=None, emotion_id=None, image=None):
         # Check if emotion already exists
         for emotion in self.emotions:
             if emotion.emotion_id == emotion_id or emotion.name == emotion_name:
@@ -29,3 +29,9 @@ class Character:
         for emotion in self.emotions:
             if emotion.emotion_id == emotion_id:
                 return emotion.image
+            
+    @classmethod
+    def get_character(cls, character_id):
+        for character in cls.instances:
+            if character.character_id == character_id:
+                return character
