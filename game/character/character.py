@@ -4,10 +4,14 @@ class Character:
     """
     A class to represent a character in the game.
     """
+    instances = []
+    
     def __init__(self, character_id, name):
         self.character_id = character_id
         self.name = name
         self.emotions = []
+
+        Character.instances.append(self)
 
     def add_emotion(self, emotion_name, emotion_id, image=None):
         # Check if emotion already exists
@@ -20,3 +24,8 @@ class Character:
         emotion = Emotion(emotion_name, emotion_id)
         emotion.set_image(image)
         self.emotions.append(emotion)
+
+    def get_image(self, emotion_id):
+        for emotion in self.emotions:
+            if emotion.emotion_id == emotion_id:
+                return emotion.image
