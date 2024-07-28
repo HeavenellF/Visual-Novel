@@ -17,14 +17,11 @@ class Emotion:
 
     def __init__(self, name=None, emotion_id=None):
         if name is None and emotion_id is None:
-            print("Emotion needs a name or emotion ID")
-            return
+            raise ValueError("Emotion needs a name or emotion ID")
         if emotion_id is not None and emotion_id not in self.EMOTIONS:
-            print(f"Emotion ID {emotion_id} does not exist")
-            return
+            raise ValueError(f"Emotion ID {emotion_id} does not exist")
         if name is not None and name not in self.EMOTIONS.values():
-            print(f"Emotion name '{name}' does not exist")
-            return
+            raise ValueError(f"Emotion name '{name}' does not exist")
 
         self.name = name
         self.emotion_id = emotion_id
@@ -33,6 +30,6 @@ class Emotion:
     def set_image(self, image):
         # Check if image exists
         if not os.path.exists(image):
-            print(f"Image {image} does not exist for emotion {self.name}")
-            return
+            raise FileNotFoundError(f"Image {image} does not exist")
+        
         self.image = image
