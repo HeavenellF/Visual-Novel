@@ -20,9 +20,17 @@ class Character:
                 print(f"Emotion with id {emotion_id} or name {emotion_name} already exists for character {self.name}")
                 return
 
-        # Create a new emotion
-        emotion = Emotion(emotion_name, emotion_id)
-        emotion.set_image(image)
+        # Create a new emotion and set the image
+        try :
+            emotion = Emotion(emotion_name, emotion_id)
+            emotion.set_image(image)
+        except ValueError as e:
+            print(e)
+            return
+        except FileNotFoundError as e:
+            print(e)
+            return
+        
         self.emotions.append(emotion)
 
     def get_image(self, emotion_id):
