@@ -18,10 +18,30 @@ class Emotion:
     def __init__(self, name=None, emotion_id=None):
         if name is None and emotion_id is None:
             raise ValueError("Emotion needs a name or emotion ID")
-        if emotion_id is not None and emotion_id not in self.EMOTIONS:
-            raise ValueError(f"Emotion ID {emotion_id} does not exist")
-        if name is not None and name not in self.EMOTIONS.values():
-            raise ValueError(f"Emotion name '{name}' does not exist")
+        
+        if emotion_id is not None:
+            if not isinstance(emotion_id, int):
+                raise TypeError("Emotion ID must be an integer")
+            if emotion_id not in self.EMOTIONS:
+                raise ValueError(f"Emotion ID {emotion_id} does not exist")
+
+        if name is not None:
+            if not isinstance(name, str):
+                raise TypeError("Emotion name must be a string")
+            if name not in self.EMOTIONS.values():
+                raise ValueError(f"Emotion name '{name}' does not exist")
+        
+        # Ensure consistency between name and emotion_id
+        if name is not None and emotion_id is not None:
+            if self.EMOTIONS[emotion_id] != name:
+                raise ValueError(f"Emotion ID {emotion_id} and name '{name}' do not match")
+        
+        # If only one is provided, derive the other
+        if name is None:
+            name = self.EMOTIONS[emotion_id]
+        if emotion_id is None:
+            emotion_id = next(key for key, value in self.EMOTIONS.items() if value == name)
+
 
         self.name = name
         self.emotion_id = emotion_id

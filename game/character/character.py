@@ -4,9 +4,14 @@ class Character:
     """
     A class to represent a character in the game.
     """
+
     instances = []
-    
+
     def __init__(self, character_id, name):
+        if character_id is None:
+            raise ValueError("Character needs an ID")
+        if name is None:
+            raise ValueError("Character needs a name")
         self.character_id = character_id
         self.name = name
         self.emotions = []
