@@ -15,6 +15,7 @@ pygame.display.set_caption("Visual Novel")
 # initialize Setting
 setting = Setting()
 
+game_state = "game"
 
 # Main game loop
 def main():
@@ -35,10 +36,9 @@ def main():
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                 setting.to_fullscreen()
                 scene.init_dialogue_box()
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                scene.next_dialogue()
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
-                scene.prev_dialogue()
+            
+            if game_state == "game":
+                input_in_game(event, scene)
 
 
         screen.fill((0, 0, 0))  # Fill the screen with black
@@ -51,6 +51,12 @@ def main():
 
     pygame.quit()
     sys.exit()
+
+def input_in_game(event, scene):
+    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+        scene.next_dialogue()
+    elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
+        scene.prev_dialogue()
 
 if __name__ == "__main__":
     main()
