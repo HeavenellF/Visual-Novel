@@ -25,4 +25,3 @@ class Setting:
         self.multiplier = 10
         pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.update_display_info()
-        
