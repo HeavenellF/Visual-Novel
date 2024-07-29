@@ -9,8 +9,8 @@ class DialogueBox:
         self.background_color = background_color
         self.name = ""
         self.dialogue = ""
-        self.font_name = pygame.font.Font(None, int(4.8*setting.multiplier))
-        self.font_dialogue = pygame.font.Font(None, int(3.2*setting.multiplier))
+        self.font_name = pygame.font.Font(None, int(6*setting.multiplier))
+        self.font_dialogue = pygame.font.Font(None, int(4*setting.multiplier))
         self.setting = setting
         self.name_position = (self.x + int(1*setting.multiplier), self.y + int(1*setting.multiplier))
 
@@ -33,7 +33,7 @@ class DialogueBox:
         
         # Render the dialogue text with word wrapping
         dialogue_lines = self.wrap_text(self.dialogue, self.font_dialogue, self.width - int(6*self.setting.multiplier))
-        y_offset = self.y + int(6*self.setting.multiplier)  # padding from the top
+        y_offset = self.y + int(8*self.setting.multiplier)  # padding from the top
         for line in dialogue_lines:
             dialogue_surface = self.font_dialogue.render(line, True, (255, 255, 255))
             screen.blit(dialogue_surface, (self.x + int(3*self.setting.multiplier), y_offset))
