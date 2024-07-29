@@ -21,7 +21,7 @@ def main():
 
     running = True
     clock = pygame.time.Clock()
-    scene = Scene(setting)
+    scene = Scene(setting, "test/storyTest.json")
 
     while running:
         for event in pygame.event.get():
@@ -31,10 +31,10 @@ def main():
                 running = False
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                 setting.resize_display(1344, 756)
-                scene = Scene(setting)
+                scene.init_dialogue_box()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                 setting.to_fullscreen()
-                scene = Scene(setting)
+                scene.init_dialogue_box()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 scene.next_dialogue()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
