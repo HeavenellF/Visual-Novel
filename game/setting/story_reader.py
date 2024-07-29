@@ -12,7 +12,9 @@ class StoryReader:
         self.path = path
         self.data = self.read()
 
+        self.dialogues = []
         self.create_character()
+        self.create_dialogue()
 
     def read(self):
         with open(self.path, 'r', encoding="utf-8") as file:
@@ -31,3 +33,13 @@ class StoryReader:
                 emotion_image = emotion["image"]
                 char.add_emotion(emotion_name, emotion_id,  emotion_image)
 
+    def create_dialogue(self):
+        for dialogue in self.data["dialogues"]:
+
+            dialogue_entry = {
+                "character_id": dialogue["character_id"],
+                "emotion_id": dialogue["emotion_id"],
+                "text": dialogue["text"]
+            }
+
+            self.dialogues.append(dialogue_entry)
