@@ -2,6 +2,7 @@ import sys
 import pygame
 from game.setting import Setting
 from game.scene import Scene
+from game.dialogbox import DialogueBox
 
 
 # Initialize Pygame
@@ -57,6 +58,12 @@ def input_in_game(event, scene):
         scene.next_dialogue()
     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
         scene.prev_dialogue()
+    elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
+        DialogueBox.change_font_prev()
+        print(f"Font: {DialogueBox.font} and Index: {DialogueBox.font_index}")
+    elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+        DialogueBox.change_font_next()
+        print(f"Font: {DialogueBox.font} and Index: {DialogueBox.font_index}")
 
 if __name__ == "__main__":
     main()
