@@ -4,18 +4,18 @@ from game.character import Character
 
 class Scene:
     def __init__(self, setting, path):
-        self.INDEX = -1
+        self.INDEX = 0
         self.setting = setting
         self.background = None
+
+        self.story_path = path
+        self.story = None
+        self.init_story()
 
         self.dialogue_box = None
         self.dialogue_box_background = (255, 255, 255)
         self.init_dialogue_box()
 
-        self.story_path = path
-        self.story = None
-
-        self.init_story()
 
     def init_dialogue_box(self):
         self.dialogue_box_x = int(5*self.setting.multiplier)
@@ -24,6 +24,7 @@ class Scene:
         self.dialogue_box_height = self.setting.get_dimensions()[1]- int(75*self.setting.multiplier)
         self.dialogue_box = DialogueBox(self.dialogue_box_x, self.dialogue_box_y, self.dialogue_box_width, self.dialogue_box_height, self.dialogue_box_background, self.setting)
 
+        self.insert_dialogue()
         # for testing purposes
         # self.dialogue_box.set_name("Character Name")
         # self.dialogue_box.set_dialogue("This is a sample dialogue for testing the DialogueBox. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A ")
