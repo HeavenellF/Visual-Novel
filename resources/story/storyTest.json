@@ -1,0 +1,68 @@
+{
+    "characters": [
+        {
+            "name": "Yui Inoue",
+            "character_id": "YI-01",
+            "emotions": [
+                {
+                    "emotion_id": 0,
+                    "name": "neutral",
+                    "image": "resources/images/character/yui_inoue/yui_inoue_neutral.png"
+                },
+                {
+                    "emotion_id": 1,
+                    "name": "happy",
+                    "image": "resources/images/character/yui_inoue/yui_inoue_happy.png"
+                }
+            ]
+        },
+        {
+            "name": "Kei Haruto",
+            "character_id": "KH-01",
+            "emotions": [
+                {
+                    "emotion_id": 0,
+                    "name": "neutral",
+                    "image": "resources/images/character/kei_haruto/kei_haruto_neutral.png"
+                },
+                {
+                    "emotion_id": 1,
+                    "name": "happy",
+                    "image": "resources/images/character/kei_haruto/kei_haruto_happy.png"
+                }
+            ]
+        }
+    ],
+    "dialogues": [
+        {
+            "character_id": "YI-01",
+            "emotion_id": 1,
+            "text": "Kei! Are you okay? are you hurt?"
+        },
+        {
+            "character_id": "KH-01",
+            "emotion_id": 2,
+            "text": "Ugh.."
+        },
+        {
+            "character_id": "YI-01",
+            "emotion_id": 1,
+            "text": "You're bleeding! Let me help you!"
+        },
+        {
+            "character_id": "KH-01",
+            "emotion_id": 2,
+            "text": "I'm fine, Yui. Don't worry about me."
+        },
+        {
+            "character_id": "YI-01",
+            "emotion_id": 1,
+            "text": "What are you talking about? You're hurt!"
+        },
+        {
+            "character_id": "KH-01",
+            "emotion_id": 2,
+            "text": "Dont touch me, Yui. I'm fine."
+        }
+    ]
+}
