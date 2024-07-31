@@ -2,11 +2,16 @@ import pygame
 
 class DialogueBox:
 
+    _instance = None
     font_index = 0
     font_max_index = len(pygame.font.get_fonts()) - 1
     print(f"Font Max Index: {font_max_index}")
     font = 'comicsansms'
-    instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(DialogueBox, cls).__new__(cls)
+        return cls._instance
 
     def __init__(self, x, y, width, height, background_color=(0, 0, 0), setting=None):
         self.x = x
@@ -21,7 +26,7 @@ class DialogueBox:
         self.setting = setting
         self.name_position = (self.x + int(1*setting.multiplier), self.y + int(1*setting.multiplier))
 
-        DialogueBox.instance = self
+        DialogueBox._instance = self
 
     def set_name(self, name):
         self.name = name
@@ -75,11 +80,11 @@ class DialogueBox:
         cls.font_index += 1
         if cls.font_index > cls.font_max_index:
             cls.font_index = 0
-        cls.instance.change_font()
+        cls._instance.change_font()
 
     @classmethod
     def change_font_prev(cls):
         cls.font_index -= 1
         if cls.font_index < 0:
             cls.font_index = cls.font_max_index
-        cls.instance.change_font()
+        cls._instance.change_font()
