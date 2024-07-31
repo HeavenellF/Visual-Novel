@@ -2,16 +2,12 @@ import pygame
 
 class DialogueBox:
 
-    _instance = None
-    font_index = 0
-    font_max_index = len(pygame.font.get_fonts()) - 1
-    print(f"Font Max Index: {font_max_index}")
-    font = 'comicsansms'
+    instance = None
 
     def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(DialogueBox, cls).__new__(cls)
-        return cls._instance
+        if not cls.instance:
+            cls.instance = super(DialogueBox, cls).__new__(cls)
+        return cls.instance
 
     def __init__(self, x, y, width, height, background_color=(0, 0, 0), setting=None):
         self.x = x
@@ -21,12 +17,12 @@ class DialogueBox:
         self.background_color = background_color
         self.name = ""
         self.dialogue = ""
-        self.font_name = pygame.font.SysFont(self.font, int(5*setting.multiplier))
-        self.font_dialogue = pygame.font.SysFont(self.font, int(3.5*setting.multiplier))
+        self.font_name = pygame.font.SysFont(setting.font, int(5*setting.multiplier))
+        self.font_dialogue = pygame.font.SysFont(setting.font, int(3.5*setting.multiplier))
         self.setting = setting
         self.name_position = (self.x + int(1*setting.multiplier), self.y + int(1*setting.multiplier))
 
-        DialogueBox._instance = self
+        DialogueBox.instance = self
 
     def set_name(self, name):
         self.name = name
@@ -70,21 +66,5 @@ class DialogueBox:
         return lines
     
     def change_font(self):
-        cls = self.__class__
-        cls.font = pygame.font.get_fonts()[cls.font_index]
-        self.font_name = pygame.font.SysFont(self.font, int(5*self.setting.multiplier))
-        self.font_dialogue = pygame.font.SysFont(self.font, int(3.5*self.setting.multiplier))
-
-    @classmethod
-    def change_font_next(cls):
-        cls.font_index += 1
-        if cls.font_index > cls.font_max_index:
-            cls.font_index = 0
-        cls._instance.change_font()
-
-    @classmethod
-    def change_font_prev(cls):
-        cls.font_index -= 1
-        if cls.font_index < 0:
-            cls.font_index = cls.font_max_index
-        cls._instance.change_font()
+        self.font_name = pygame.font.SysFont(self.setting.font, int(5*self.setting.multiplier))
+        self.font_dialogue = pygame.font.SysFont(self.setting.font, int(3.5*self.setting.multiplier))
