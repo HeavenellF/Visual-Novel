@@ -47,7 +47,7 @@ def main():
 
 
         pygame.display.flip()         # Update the display
-        clock.tick(60)                # Cap the frame rate to 60 FPS
+        clock.tick(30)                # Cap the frame rate to 30 FPS
 
     pygame.quit()
     sys.exit()
@@ -58,9 +58,9 @@ def input_in_game(event, scene):
     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
         scene.prev_dialogue()
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-        scene.change_font_prev()
+        setting.change_font_prev()
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-        scene.change_font_next()
+        setting.change_font_next()
 
 if __name__ == "__main__":
     main()
