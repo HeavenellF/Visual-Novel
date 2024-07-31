@@ -1,10 +1,10 @@
-from game.dialogbox import DialogueBox
+from game.ui.dialogbox import DialogueBox
 from game.setting import StoryReader
 from game.character import Character
 
 class Scene:
     def __init__(self, setting, path):
-        self.INDEX = 0
+        self.index = 0
         self.setting = setting
         self.background = None
 
@@ -32,19 +32,19 @@ class Scene:
         self.background = background
 
     def next_dialogue(self):
-        if self.INDEX == len(self.story.dialogues)-1:
+        if self.index == len(self.story.dialogues)-1:
             return
-        self.INDEX += 1
+        self.index += 1
         self.insert_dialogue()
 
     def prev_dialogue(self):
-        if self.INDEX <= 0:
+        if self.index <= 0:
             return
-        self.INDEX -= 1
+        self.index -= 1
         self.insert_dialogue()
 
     def insert_dialogue(self):
-        current_dialogue = self.story.dialogues[self.INDEX]
+        current_dialogue = self.story.dialogues[self.index]
         for character in Character.instances:
             if character.character_id == current_dialogue.get("character_id"):
                 self.dialogue_box.set_name(character.name)
@@ -53,9 +53,3 @@ class Scene:
 
     def draw(self, screen):
         self.dialogue_box.draw(screen)
-
-    def change_font_next(self):
-        DialogueBox.change_font_next()
-
-    def change_font_prev(self):
-        DialogueBox.change_font_prev()
