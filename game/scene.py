@@ -16,7 +16,6 @@ class Scene:
         self.dialogue_box_background = (255, 255, 255)
         self.init_dialogue_box()
 
-
     def init_dialogue_box(self):
         self.dialogue_box_x = int(5*self.setting.multiplier)
         self.dialogue_box_y = int(70*self.setting.multiplier)
@@ -25,9 +24,6 @@ class Scene:
         self.dialogue_box = DialogueBox(self.dialogue_box_x, self.dialogue_box_y, self.dialogue_box_width, self.dialogue_box_height, self.dialogue_box_background, self.setting)
 
         self.insert_dialogue()
-        # for testing purposes
-        # self.dialogue_box.set_name("Character Name")
-        # self.dialogue_box.set_dialogue("This is a sample dialogue for testing the DialogueBox. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A ")
     
     def init_story(self):
         self.story = StoryReader(self.story_path)
@@ -55,6 +51,11 @@ class Scene:
                 break
         self.dialogue_box.set_dialogue(current_dialogue.get("text"))
 
-
     def draw(self, screen):
         self.dialogue_box.draw(screen)
+
+    def change_font_next(self):
+        DialogueBox.change_font_next()
+
+    def change_font_prev(self):
+        DialogueBox.change_font_prev()
