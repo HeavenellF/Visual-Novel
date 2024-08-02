@@ -2,6 +2,7 @@ import sys
 import pygame
 from game.setting import Setting
 from game.scene import Scene
+from game.ui import Button
 
 
 # Initialize Pygame
@@ -24,6 +25,10 @@ def main():
     clock = pygame.time.Clock()
     scene = Scene(setting, "resources/story/storyTest.json")
 
+    button_image = pygame.image.load("resources/images/button.png").convert_alpha()
+    button_image = pygame.transform.scale(button_image, (200, 50))
+    button_quit = Button("Quit", 100, 100, button_image, lambda: sys.exit(), setting)
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -42,6 +47,7 @@ def main():
 
 
         screen.fill((0, 0, 0))  # Fill the screen with black
+        button_quit.draw(screen)
 
         scene.draw(screen)
 
@@ -55,6 +61,9 @@ def main():
 def input_in_game(event, scene):
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
         scene.next_dialogue()
+        for button in Button.instances:
+            if button.rect.collidepoint(event.pos):
+                button.handle()
     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
         scene.prev_dialogue()
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
