@@ -20,14 +20,10 @@ game_state = "game"
 
 # Main game loop
 def main():
-
     running = True
     clock = pygame.time.Clock()
     scene = Scene(setting, "resources/story/storyTest.json")
-
-    button_image = pygame.image.load("resources/images/button.png").convert_alpha()
-    button_image = pygame.transform.scale(button_image, (200, 50))
-    button_quit = Button("Quit", 100, 100, button_image, lambda: sys.exit(), setting)
+    create_button()
 
     while running:
         for event in pygame.event.get():
@@ -47,13 +43,14 @@ def main():
 
 
         screen.fill((0, 0, 0))  # Fill the screen with black
-        button_quit.draw(screen)
+        for button in Button.instances:
+            button.draw(screen)
 
         scene.draw(screen)
 
 
         pygame.display.flip()         # Update the display
-        clock.tick(30)                # Cap the frame rate to 30 FPS
+        clock.tick(10)                # Cap the frame rate to 30 FPS
 
     pygame.quit()
     sys.exit()
@@ -70,6 +67,15 @@ def input_in_game(event, scene):
         setting.change_font_prev()
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
         setting.change_font_next()
+
+def create_button():
+    def quit_button_function():
+        pygame.quit()
+        sys.exit()
+    
+    button_image = pygame.image.load("resources/images/button.png").convert_alpha()
+    button_image = pygame.transform.scale(button_image, (200, 50))
+    Button("Quit", 960, 500, button_image, quit_button_function, setting)
 
 if __name__ == "__main__":
     main()
