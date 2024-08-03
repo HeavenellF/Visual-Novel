@@ -1,5 +1,5 @@
 from game.ui.dialogbox import DialogueBox
-from game.setting import StoryReader
+from game.story import Story
 from game.character import Character
 
 class Scene:
@@ -36,7 +36,7 @@ class Scene:
         self.insert_dialogue()
     
     def init_story(self):
-        self.story = StoryReader(self.story_path)
+        self.story = Story(self.story_path)
 
     def set_background(self, background):
         self.background = background
