@@ -1,13 +1,11 @@
-import json
-import sys
-import os
+from game.setting.util import read_json_file
 from game.character import Character
 
 # back 2 directories so that the code can access packages in root directory
 # note the ".." twice is the root directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-class StoryReader:
+class Story:
     def __init__(self, path):
         self.path = path
         self.data = self.read()
@@ -17,8 +15,7 @@ class StoryReader:
         self.create_dialogue()
 
     def read(self):
-        with open(self.path, 'r', encoding="utf-8") as file:
-            return json.load(file)
+        return read_json_file(self.path)
         
     def create_character(self):
         for character in self.data["characters"]:
