@@ -10,6 +10,11 @@ class DialogueBox:
         return cls.instance
 
     def __init__(self, x, y, width, height, background_color=(0, 0, 0), setting=None):
+        """
+        __init__ doesnt have Initialization Guard because the code needs to change 
+        the attributes of the instance. By removing the Initialization Guard, the 
+        code can change the attributes by trying to create a new instance of the class.
+        """
         self.x = x
         self.y = y
         self.width = width
@@ -23,6 +28,7 @@ class DialogueBox:
         self.name_position = (self.x + int(1*setting.multiplier), self.y + int(1*setting.multiplier))
 
         DialogueBox.instance = self
+        print(DialogueBox.instance)
 
     def set_name(self, name):
         self.name = name
