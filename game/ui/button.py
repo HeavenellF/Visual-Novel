@@ -22,4 +22,5 @@ class Button:
         screen.blit(text_surf, text_rect)
         
     def handle(self):
-        self.action()
+        if self.action: 
+            self.action()
