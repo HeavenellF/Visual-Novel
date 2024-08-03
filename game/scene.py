@@ -3,6 +3,14 @@ from game.setting import StoryReader
 from game.character import Character
 
 class Scene:
+
+    instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.instance:
+            cls.instance = super(Scene, cls).__new__(cls)
+        return cls.instance
+
     def __init__(self, setting, path):
         self.index = 0
         self.setting = setting
@@ -15,6 +23,8 @@ class Scene:
         self.dialogue_box = None
         self.dialogue_box_background = (255, 255, 255)
         self.init_dialogue_box()
+
+        Scene.instance = self
 
     def init_dialogue_box(self):
         self.dialogue_box_x = int(5*self.setting.multiplier)
