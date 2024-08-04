@@ -16,7 +16,7 @@ pygame.display.set_caption("Visual Novel")
 # initialize Setting
 setting = Setting()
 
-game_state = "game"
+game_state = "main_menu"
 
 # Main game loop
 def main():
@@ -26,27 +26,38 @@ def main():
     create_button()
 
     while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                running = False
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-                setting.resize_display(1344, 756)
-                scene.init_dialogue_box()
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
-                setting.to_fullscreen()
-                scene.init_dialogue_box()
-            
-            if game_state == "game":
-                input_in_game(event, scene)
-
-
         screen.fill((0, 0, 0))  # Fill the screen with black
-        for button in Button.instances:
-            button.draw(screen)
+        if game_state == "main_menu":
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
+                    setting.resize_display(1344, 756)
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
+                    setting.to_fullscreen()
+                input_in_main_menu(event)
+            
+            for button in Button.instances:
+                button.draw(screen)
+                
 
-        scene.draw(screen)
+        elif game_state == "game":
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
+                    setting.resize_display(1344, 756)
+                    scene.init_dialogue_box()
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
+                    setting.to_fullscreen()
+                    scene.init_dialogue_box()
+                input_in_game(event, scene)
+            
+            scene.draw(screen)
 
 
         pygame.display.flip()         # Update the display
@@ -58,9 +69,6 @@ def main():
 def input_in_game(event, scene):
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
         scene.next_dialogue()
-        for button in Button.instances:
-            if button.rect.collidepoint(event.pos):
-                button.handle()
     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
         scene.prev_dialogue()
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
@@ -68,14 +76,29 @@ def input_in_game(event, scene):
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
         setting.change_font_next()
 
+def input_in_main_menu(event):
+    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+        for button in Button.instances:
+            if button.rect.collidepoint(event.pos):
+                button.handle()
+
 def create_button():
+    def start_button_function():
+        global game_state
+        game_state = "game"
+        print(game_state)
     def quit_button_function():
         pygame.quit()
         sys.exit()
     
     button_image = pygame.image.load("resources/images/button.png").convert_alpha()
     button_image = pygame.transform.scale(button_image, (200, 50))
-    Button("Quit", 960, 500, button_image, quit_button_function, setting)
+
+    start_function = locals().get("start_button_function")
+    quit_function = locals().get("quit_button_function")
+    Button("Start", 960, 100, button_image, start_function, setting)
+    Button("Setting", 960, 300, button_image, None, setting)
+    Button("Quit", 960, 500, button_image, quit_function, setting)
 
 if __name__ == "__main__":
     main()
