@@ -1,0 +1,49 @@
+{
+    "Start" : {
+        "submenu" : [
+            {
+                "name" : "Timeline 1",
+                "scenes" : [
+                    {
+                        "scene": "Morning Routine",
+                        "path": "resources/story/morning_routine.json"
+                    },
+                    {
+                        "scene": "On the way to the school",
+                        "path": "resources/story/on_the_way_to_the_school.json"
+                    },
+                    {
+                        "scene": "At the school",
+                        "path": "resources/story/at_the_school.json"
+                    },
+                    {
+                        "scene": "After school",
+                        "path": "resources/story/after_school.json"
+                    }
+                ]
+            },
+            {
+                "name" : "Timeline 2",
+                "scenes" : [
+                    {
+                        "scene": "Wake up",
+                        "path": "resources/story/wake_up.json"
+                    },
+                    {
+                        "scene": "Outside the hospital",
+                        "path": "resources/story/outside_the_hospital.json"
+                    },
+                    {
+                        "scene": "The Loop",
+                        "path": "resources/story/the_loop.json"
+                    }
+                ]
+            }
+        ]
+    },
+    "Setting" : {
+    },
+    "Exit" : {
+        "function" : "quit_button_function"
+    }
+}
