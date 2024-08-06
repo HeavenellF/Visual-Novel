@@ -1,5 +1,7 @@
 {
-    "Start" : {
+    "main menu" : [
+    {
+        "name" : "Start",
         "submenu" : [
             {
                 "name" : "Timeline 1",
@@ -41,9 +43,12 @@
             }
         ]
     },
-    "Setting" : {
+    {
+        "name" : "Settings"
     },
-    "Exit" : {
+    {   
+        "name" : "Quit",
         "function" : "quit_button_function"
     }
+    ]
 }
