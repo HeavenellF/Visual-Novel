@@ -7,19 +7,19 @@
                 "name" : "Timeline 1",
                 "scenes" : [
                     {
-                        "scene": "Morning Routine",
+                        "name": "Morning Routine",
                         "path": "resources/story/morning_routine.json"
                     },
                     {
-                        "scene": "On the way to the school",
+                        "name": "On the way to the school",
                         "path": "resources/story/on_the_way_to_the_school.json"
                     },
                     {
-                        "scene": "At the school",
+                        "name": "At the school",
                         "path": "resources/story/at_the_school.json"
                     },
                     {
-                        "scene": "After school",
+                        "name": "After school",
                         "path": "resources/story/after_school.json"
                     }
                 ]
@@ -28,15 +28,15 @@
                 "name" : "Timeline 2",
                 "scenes" : [
                     {
-                        "scene": "Wake up",
+                        "name": "Wake up",
                         "path": "resources/story/wake_up.json"
                     },
                     {
-                        "scene": "Outside the hospital",
+                        "name": "Outside the hospital",
                         "path": "resources/story/outside_the_hospital.json"
                     },
                     {
-                        "scene": "The Loop",
+                        "name": "The Loop",
                         "path": "resources/story/the_loop.json"
                     }
                 ]
