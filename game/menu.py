@@ -17,7 +17,6 @@ class Menu:
         self.menu_items = []
         self.current_menu = None
         self.x = 960
-        self.y = 25
 
         Menu.instance = self
 
@@ -31,7 +30,7 @@ class Menu:
         main_menu = "main menu"
         m = self.data[main_menu]
 
-        menu_item = MenuItem(main_menu)
+        menu_item = MenuItem(main_menu, None, self.setting)
         self.current_menu = menu_item
         self.menu_items.append(menu_item)
         for a in m:
@@ -42,32 +41,27 @@ class Menu:
         button_image = pygame.transform.scale(button_image, (200, 50))
         
         prev_menu_item = menu_item
-        new_menu_item = MenuItem(a["name"], prev_menu_item)
+        new_menu_item = MenuItem(a["name"], prev_menu_item, self.setting)
         self.menu_items.append(new_menu_item)
 
         if a.get("submenu") is not None:
-            prev_menu_item.add_button(a["name"], self.x, self.y, button_image, lambda: self.change_menu(new_menu_item), self.setting)
-            self.y += 50
+            prev_menu_item.add_button(a["name"], button_image, lambda: self.change_menu(new_menu_item))
             submenus = a["submenu"]
             for submenu in submenus:
                 self.check_submenu(submenu, new_menu_item)
 
         elif a.get("function") is not None:
             function = getattr(self, a["function"], None)
-            prev_menu_item.add_button(a["name"], self.x, self.y, button_image, function, self.setting)
-            self.y += 50
+            prev_menu_item.add_button(a["name"], button_image, function)
 
         elif a.get("scenes") is not None:
-            prev_menu_item.add_button(a["name"], self.x, self.y, button_image, lambda: self.change_menu(new_menu_item), self.setting)
-            self.y += 50
+            prev_menu_item.add_button(a["name"], button_image, lambda: self.change_menu(new_menu_item))
             scenes = a["scenes"]
             for scene in scenes:
-                new_menu_item.add_button(scene["name"], self.x, self.y, button_image, None, self.setting)
-                self.y += 50
+                new_menu_item.add_button(scene["name"], button_image, None)
         
         else:
-            prev_menu_item.add_button(a["name"], self.x, self.y, button_image, lambda: self.change_menu(new_menu_item) , self.setting)
-            self.y += 50
+            prev_menu_item.add_button(a["name"], button_image, lambda: self.change_menu(new_menu_item))
 
     def change_menu(self, menu):
         self.current_menu = menu
@@ -81,13 +75,17 @@ class Menu:
         sys.exit()
 
 class MenuItem:
-    def __init__(self, name, prev_menu=None):
+    def __init__(self, name, prev_menu=None, setting=None):
         self.name = name
         self.prev_menu = prev_menu
         self.buttons = []
+        self.setting = setting
+        self.x = int(setting.screen_width / 7)
+        self.y = int(setting.screen_height / 4)
 
-    def add_button(self, name, x, y, image, function=None, setting=None):
-        button = Button(name, x, y, image, function, setting)
+    def add_button(self, name, image, function=None):
+        button = Button(name, self.x, self.y, image, function, self.setting)
+        self.y += int(15*self.setting.multiplier)
         self.buttons.append(button)
 
     def draw(self, screen):
