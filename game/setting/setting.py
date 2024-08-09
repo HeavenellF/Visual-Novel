@@ -8,14 +8,13 @@ class Setting:
 
     font_index = pygame.font.get_fonts().index('comicsansms')
     font_max_index = len(pygame.font.get_fonts()) - 1
-    print(f"Font Max Index: {font_max_index}")
     font = 'comicsansms'
 
     def __init__(self):
         self.screen_width = 0
         self.screen_height = 0
         self.multiplier = 10
-
+        self.game_state = "main_menu"
         self.update_display_info()
         Setting.instance = self
 
