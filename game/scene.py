@@ -11,7 +11,7 @@ class Scene:
             cls.instance = super(Scene, cls).__new__(cls)
         return cls.instance
 
-    def __init__(self, setting, path):
+    def __init__(self, setting, path=None):
         self.index = 0
         self.setting = setting
         self.background = None
@@ -36,6 +36,8 @@ class Scene:
         self.insert_dialogue()
     
     def init_story(self):
+        if self.story_path is None:
+            return
         self.story = Story(self.story_path)
 
     def set_background(self, background):
