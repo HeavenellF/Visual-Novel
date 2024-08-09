@@ -2,6 +2,7 @@ import pygame
 import sys
 from game.setting.util import read_json_file
 from game.ui import Button
+from game.scene import Scene
 
 class Menu:
     instance = None
@@ -56,7 +57,10 @@ class Menu:
             prev_menu_item.add_button(a["name"], lambda: self.change_menu(new_menu_item))
             scenes = a["scenes"]
             for scene in scenes:
-                new_menu_item.add_button(scene["name"], None)
+                def _function(path=scene["path"]):
+                    Scene(self.setting, path)
+                    self.setting.game_state = "game"
+                new_menu_item.add_button(scene["name"], _function)
         
         else:
             prev_menu_item.add_button(a["name"], lambda: self.change_menu(new_menu_item))
