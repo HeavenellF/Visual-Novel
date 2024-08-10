@@ -6,7 +6,17 @@ from game.character import Character
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 class Story:
+
+    instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.instance:
+            cls.instance = super(Story, cls).__new__(cls)
+        return cls.instance
+
+
     def __init__(self, path):
+        print(f"Story : {self}")
         self.path = path
         self.data = self.read()
 
