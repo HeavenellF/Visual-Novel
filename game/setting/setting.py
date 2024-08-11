@@ -14,6 +14,7 @@ class Setting:
         self.screen_width = 0
         self.screen_height = 0
         self.multiplier = 10
+        self.fullscreen = True
         self.game_state = "main_menu"
         self.update_display_info()
         Setting.instance = self
@@ -29,11 +30,13 @@ class Setting:
     def resize_display(self, width, height):
         self.multiplier = int(self.multiplier * (width / self.screen_width))
         pygame.display.set_mode((width, height))
+        self.fullscreen = False
         self.update_display_info()
 
     def to_fullscreen(self):
         self.multiplier = 10
         pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.fullscreen = True
         self.update_display_info()
 
 

@@ -44,7 +44,13 @@
         ]
     },
     {
-        "name" : "Settings"
+        "name" : "Settings",
+        "submenu" : [
+            { 
+                "name" : "Display",
+                "function" : "change_display"
+            }
+        ]
     },
     {   
         "name" : "Quit",

@@ -13,6 +13,7 @@ class Menu:
         return cls.instance
     
     def __init__(self, setting):
+        print(f"Menu : {self}")
         self.data = self.read()
         self.setting = setting
         self.menu_items = []
@@ -67,7 +68,12 @@ class Menu:
 
     def change_menu(self, menu):
         self.current_menu = menu
-        print(self.current_menu.name)
+
+    def change_display(self):
+        if self.setting.fullscreen:
+            self.setting.resize_display(1344, 756)
+        else:
+            self.setting.to_fullscreen()
 
     def draw(self, screen):
         self.current_menu.draw(screen)
