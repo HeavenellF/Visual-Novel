@@ -49,6 +49,10 @@
             { 
                 "name" : "Display",
                 "function" : "change_display"
+            },
+            {
+                "name" : "Font",
+                "function" : "change_font"
             }
         ]
     },
