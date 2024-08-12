@@ -66,6 +66,7 @@ class Menu:
         else:
             prev_menu_item.add_button(a["name"], lambda: self.change_menu(new_menu_item))
 
+    # Functions for buttons
     def change_menu(self, menu):
         self.current_menu = menu
 
@@ -74,6 +75,9 @@ class Menu:
             self.setting.resize_display(1344, 756)
         else:
             self.setting.to_fullscreen()
+    
+    def change_font(self):
+        self.setting.change_font_next()
 
     def draw(self, screen):
         self.current_menu.draw(screen)
