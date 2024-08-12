@@ -9,7 +9,7 @@ class DialogueBox:
             cls.instance = super(DialogueBox, cls).__new__(cls)
         return cls.instance
 
-    def __init__(self, x, y, width, height, background_color=(0, 0, 0), setting=None):
+    def __init__(self, x=0, y=0, width=0, height=0, background_color=(0, 0, 0), setting=None):
         """
         __init__ doesnt have Initialization Guard because the code needs to change 
         the attributes of the instance. By removing the Initialization Guard, the 
@@ -28,7 +28,7 @@ class DialogueBox:
         self.name_position = (self.x + int(1*setting.multiplier), self.y + int(1*setting.multiplier))
 
         DialogueBox.instance = self
-        print(DialogueBox.instance)
+        print(self)
 
     def set_name(self, name):
         self.name = name
