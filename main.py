@@ -3,7 +3,7 @@ import pygame
 from game.setting import Setting
 from game.scene import Scene
 from game.menu import Menu
-
+from game.ui import DialogueBox
 
 # Initialize Pygame
 pygame.init()
@@ -15,15 +15,22 @@ pygame.display.set_caption("Visual Novel")
 
 # initialize Setting
 setting = Setting()
+
+# Initialize Menu
 menu = Menu(setting)
 menu.init_menu()
+
+# Initialize DialogueBox
+DialogueBox(setting=setting)
+
+# Initialize Scene
+scene = Scene(setting, None)
 
 # Main game loop
 def main():
     running = True
     clock = pygame.time.Clock()
-    scene = Scene(setting, None)
-    # scene = Scene(setting, None)
+    
 
     while running:
         screen.fill((0, 0, 0))  # Fill the screen with black
