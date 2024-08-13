@@ -33,7 +33,7 @@
             ]
         }
     ],
-    "dialogues": [
+    "dialogs": [
         {
             "character_id": "YI-01",
             "emotion_id": 1,

@@ -94,7 +94,7 @@ class MenuItem:
         self.setting = setting
         self.x = int(setting.screen_width / 7)
         self.y = int(setting.screen_height / 4)
-        self.button_image = pygame.image.load("resources/images/button.png").convert_alpha()
+        self.button_image = pygame.image.load("resources/images/ui/button.png").convert_alpha()
         self.button_image = pygame.transform.scale(self.button_image, (400, 50))
 
     def add_button(self, name, function=None):
