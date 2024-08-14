@@ -11,16 +11,19 @@ class Button:
         self.rect.topleft = (x, y)
         self.action = action
         self.setting = setting
+        self.font = pygame.font.SysFont(self.setting.instance.font, int(2*self.setting.multiplier))
 
         Button.instances.append(self)
 
     def draw(self, screen):
-        font = pygame.font.SysFont(self.setting.instance.font, int(2*self.setting.multiplier))
-        text_surf  = font.render(self.name, True, (0,0,0))
+        text_surf  = self.font.render(self.name, True, (0,0,0))
         text_rect = text_surf.get_rect(center = self.rect.center)
         screen.blit(self.image, self.rect)
         screen.blit(text_surf, text_rect)
         
+    def change_font(self):
+        self.font = pygame.font.SysFont(self.setting.instance.font, int(2*self.setting.multiplier))
+
     def handle(self):
         if self.action: 
             self.action()
