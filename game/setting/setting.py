@@ -1,6 +1,7 @@
 import pygame
 
-from game.ui.dialogbox import DialogueBox
+from game.ui import DialogBox
+from game.ui import Button
 
 class Setting:
 
@@ -43,7 +44,9 @@ class Setting:
     def change_font(self):
         cls = self.__class__
         cls.font = pygame.font.get_fonts()[cls.font_index]
-        DialogueBox.instance.change_font()
+        DialogBox.instance.change_font()
+        for button in Button.instances:
+            button.change_font()
 
     @classmethod
     def change_font_next(cls):
