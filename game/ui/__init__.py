@@ -1,4 +1,4 @@
-from .dialogbox import DialogueBox
+from .dialogbox import DialogBox
 from .button import Button
 
-__all__ = ["DialogueBox", "Button"]
+__all__ = ["DialogBox", "Button"]

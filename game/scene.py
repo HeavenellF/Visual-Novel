@@ -1,4 +1,4 @@
-from game.ui.dialogbox import DialogueBox
+from game.ui import DialogBox
 from game.story import Story
 from game.character import Character
 
@@ -12,6 +12,7 @@ class Scene:
         return cls.instance
 
     def __init__(self, setting, path=None):
+        print(f"Scene : {self}")
         self.index = 0
         self.setting = setting
         self.background = None
@@ -20,20 +21,22 @@ class Scene:
         self.story = None
         self.init_story()
 
-        self.dialogue_box = None
-        self.dialogue_box_background = (255, 255, 255)
-        self.init_dialogue_box()
+        self.dialog_box = None
+        self.dialog_box_background = (255, 255, 255)
+        self.init_dialog_box()
 
         Scene.instance = self
 
-    def init_dialogue_box(self):
-        self.dialogue_box_x = int(5*self.setting.multiplier)
-        self.dialogue_box_y = int(70*self.setting.multiplier)
-        self.dialogue_box_width = self.setting.get_dimensions()[0]- int(10*self.setting.multiplier)
-        self.dialogue_box_height = self.setting.get_dimensions()[1]- int(75*self.setting.multiplier)
-        self.dialogue_box = DialogueBox(self.dialogue_box_x, self.dialogue_box_y, self.dialogue_box_width, self.dialogue_box_height, self.dialogue_box_background, self.setting)
+    def init_dialog_box(self):
+        if self.story is None:
+            return
+        self.dialog_box_x = int(5*self.setting.multiplier)
+        self.dialog_box_y = int(70*self.setting.multiplier)
+        self.dialog_box_width = self.setting.get_dimensions()[0]- int(10*self.setting.multiplier)
+        self.dialog_box_height = self.setting.get_dimensions()[1]- int(75*self.setting.multiplier)
+        self.dialog_box = DialogBox(self.dialog_box_x, self.dialog_box_y, self.dialog_box_width, self.dialog_box_height, self.dialog_box_background, self.setting)
 
-        self.insert_dialogue()
+        self.insert_dialog()
     
     def init_story(self):
         if self.story_path is None:
@@ -43,25 +46,25 @@ class Scene:
     def set_background(self, background):
         self.background = background
 
-    def next_dialogue(self):
-        if self.index == len(self.story.dialogues)-1:
+    def next_dialog(self):
+        if self.index == len(self.story.dialogs)-1:
             return
         self.index += 1
-        self.insert_dialogue()
+        self.insert_dialog()
 
-    def prev_dialogue(self):
+    def prev_dialog(self):
         if self.index <= 0:
             return
         self.index -= 1
-        self.insert_dialogue()
+        self.insert_dialog()
 
-    def insert_dialogue(self):
-        current_dialogue = self.story.dialogues[self.index]
+    def insert_dialog(self):
+        current_dialog = self.story.dialogs[self.index]
         for character in Character.instances:
-            if character.character_id == current_dialogue.get("character_id"):
-                self.dialogue_box.set_name(character.name)
+            if character.character_id == current_dialog.get("character_id"):
+                self.dialog_box.set_name(character.name)
                 break
-        self.dialogue_box.set_dialogue(current_dialogue.get("text"))
+        self.dialog_box.set_dialog(current_dialog.get("text"))
 
     def draw(self, screen):
-        self.dialogue_box.draw(screen)
+        self.dialog_box.draw(screen)

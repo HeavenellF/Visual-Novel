@@ -3,7 +3,7 @@ import pygame
 from game.setting import Setting
 from game.scene import Scene
 from game.menu import Menu
-from game.ui import DialogueBox
+from game.ui import DialogBox
 
 # Initialize Pygame
 pygame.init()
@@ -20,8 +20,8 @@ setting = Setting()
 menu = Menu(setting)
 menu.init_menu()
 
-# Initialize DialogueBox
-DialogueBox(setting=setting)
+# Initialize DialogBox
+DialogBox(setting=setting)
 
 # Initialize Scene
 scene = Scene(setting, None)
@@ -40,8 +40,10 @@ def main():
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                     setting.resize_display(1344, 756)
+                    setting.change_font()
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                     setting.to_fullscreen()
+                    setting.change_font()
                 input_in_main_menu(event)
             
             menu.draw(screen)
@@ -55,10 +57,10 @@ def main():
                     setting.game_state = "main_menu"
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                     setting.resize_display(1344, 756)
-                    scene.init_dialogue_box()
+                    scene.init_dialog_box()
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                     setting.to_fullscreen()
-                    scene.init_dialogue_box()
+                    scene.init_dialog_box()
                 input_in_game(event, scene)
             
             scene.draw(screen)
@@ -72,9 +74,9 @@ def main():
 
 def input_in_game(event, scene):
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-        scene.next_dialogue()
+        scene.next_dialog()
     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
-        scene.prev_dialogue()
+        scene.prev_dialog()
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
         setting.change_font_prev()
     elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:

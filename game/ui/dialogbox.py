@@ -1,12 +1,12 @@
 import pygame
 
-class DialogueBox:
+class DialogBox:
 
     instance = None
 
     def __new__(cls, *args, **kwargs):
         if not cls.instance:
-            cls.instance = super(DialogueBox, cls).__new__(cls)
+            cls.instance = super(DialogBox, cls).__new__(cls)
         return cls.instance
 
     def __init__(self, x=0, y=0, width=0, height=0, background_color=(0, 0, 0), setting=None):
@@ -21,19 +21,19 @@ class DialogueBox:
         self.height = height
         self.background_color = background_color
         self.name = ""
-        self.dialogue = ""
+        self.dialog = ""
         self.font_name = pygame.font.SysFont(setting.font, int(5*setting.multiplier))
-        self.font_dialogue = pygame.font.SysFont(setting.font, int(3.5*setting.multiplier))
+        self.font_dialog = pygame.font.SysFont(setting.font, int(3.5*setting.multiplier))
         self.setting = setting
         self.name_position = (self.x + int(1*setting.multiplier), self.y + int(1*setting.multiplier))
 
-        DialogueBox.instance = self
+        DialogBox.instance = self
         print(self)
 
     def set_name(self, name):
         self.name = name
-    def set_dialogue(self, dialogue):
-        self.dialogue = dialogue
+    def set_dialog(self, dialog):
+        self.dialog = dialog
 
     def draw(self, screen):
         # Create a surface with an alpha channel
@@ -47,13 +47,13 @@ class DialogueBox:
         name_surface = self.font_name.render(self.name, True, (255, 255, 255))
         screen.blit(name_surface, self.name_position)  # padding from the top and left
         
-        # Render the dialogue text with word wrapping
-        dialogue_lines = self.wrap_text(self.dialogue, self.font_dialogue, self.width - int(6*self.setting.multiplier))
+        # Render the dialog text with word wrapping
+        dialog_lines = self.wrap_text(self.dialog, self.font_dialog, self.width - int(6*self.setting.multiplier))
         y_offset = self.y + int(8*self.setting.multiplier)  # padding from the top
-        for line in dialogue_lines:
-            dialogue_surface = self.font_dialogue.render(line, True, (255, 255, 255))
-            screen.blit(dialogue_surface, (self.x + int(3*self.setting.multiplier), y_offset))
-            y_offset += self.font_dialogue.get_height() + int(1*self.setting.multiplier)  # Move to the next line
+        for line in dialog_lines:
+            dialog_surface = self.font_dialog.render(line, True, (255, 255, 255))
+            screen.blit(dialog_surface, (self.x + int(3*self.setting.multiplier), y_offset))
+            y_offset += self.font_dialog.get_height() + int(1*self.setting.multiplier)  # Move to the next line
 
 
     def wrap_text(self, text, font, max_width):
@@ -73,4 +73,4 @@ class DialogueBox:
     
     def change_font(self):
         self.font_name = pygame.font.SysFont(self.setting.font, int(5*self.setting.multiplier))
-        self.font_dialogue = pygame.font.SysFont(self.setting.font, int(3.5*self.setting.multiplier))
+        self.font_dialog = pygame.font.SysFont(self.setting.font, int(3.5*self.setting.multiplier))

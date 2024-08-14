@@ -20,9 +20,9 @@ class Story:
         self.path = path
         self.data = self.read()
 
-        self.dialogues = []
+        self.dialogs = []
         self.create_character()
-        self.create_dialogue()
+        self.create_dialog()
 
     def read(self):
         return read_json_file(self.path)
@@ -40,13 +40,13 @@ class Story:
                 emotion_image = emotion["image"]
                 char.add_emotion(emotion_name, emotion_id,  emotion_image)
 
-    def create_dialogue(self):
-        for dialogue in self.data["dialogues"]:
+    def create_dialog(self):
+        for dialog in self.data["dialogs"]:
 
-            dialogue_entry = {
-                "character_id": dialogue["character_id"],
-                "emotion_id": dialogue["emotion_id"],
-                "text": dialogue["text"]
+            dialog_entry = {
+                "character_id": dialog["character_id"],
+                "emotion_id": dialog["emotion_id"],
+                "text": dialog["text"]
             }
 
-            self.dialogues.append(dialogue_entry)
+            self.dialogs.append(dialog_entry)
